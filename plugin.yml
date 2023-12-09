@@ -1,0 +1,13 @@
+name: User Story Validator
+description: A user story validation plugin that assesses and vetts user story compliance in codebases
+author: https://github.com/james2791
+requirements: []
+configuration:
+  properties:
+    propertyone:
+      type: string
+    propertytwo:
+      type: string
+    propertthree:
+      type: string
+  additionalProperties: false
