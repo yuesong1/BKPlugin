@@ -27,3 +27,5 @@ fi
 # Echo the contents of user stories
 echo "User stories from ${FILE_NAME}:"
 jq "$EXPECTED_PATTERN" "$FILE_NAME"
+
+buildkite-agent annotate "$EXPECTED_PATTERN" --style 'info' --context 'user-stories-checking'
