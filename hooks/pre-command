@@ -1,7 +1,29 @@
+##!/bin/bash
+
+#set -e
+#set -x
+
+## Echo propertytwo from plugin's properties
+#echo "${BUILDKITE_PLUGIN_BUILDKITE_PLUGIN_USER_STORY_VALIDATOR_GIT_PROPERTYTWO}"
+
 #!/bin/bash
+set -euo pipefail
 
-set -e
-set -x
+FILE_NAME="user-stories.json"
+EXPECTED_PATTERN='.user_stories[] | select(.id and .content and .needed and .weight) | .content'
 
-# Echo propertytwo from plugin's properties
-echo "${BUILDKITE_PLUGIN_BUILDKITE_PLUGIN_USER_STORY_VALIDATOR_GIT_PROPERTYTWO}"
+# Check if the file exists
+if [ ! -f "$FILE_NAME" ]; then
+    echo "Error: File ${FILE_NAME} not found."
+    exit 1
+fi
+
+# Check the format and extract the content of user stories
+if ! jq "$EXPECTED_PATTERN" "$FILE_NAME" > /dev/null 2>&1; then
+    echo "Error: The format of ${FILE_NAME} is incorrect or the file is not valid JSON."
+    exit 1
+fi
+
+# Echo the contents of user stories
+echo "User stories from ${FILE_NAME}:"
+jq "$EXPECTED_PATTERN" "$FILE_NAME"
