@@ -1,6 +1,9 @@
 #!/bin/bash
 
-set -e
-set -x
+set -euox pipefail
+    
+    #chmod +x pre-command.sh && ./pre-command.sh
+    
+    #chmod +x command.sh && ./command.sh
 
-echo "This is the user story validator plugin's command hook"
+ echo -e "\`\`\`term\nThis is a \033[0;31mtest\033[0m\n\`\`\`" | buildkite-agent annotate
