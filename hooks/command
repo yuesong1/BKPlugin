@@ -13,8 +13,9 @@ exit_with_error() {
     exit 1
 }
 
+APITOKEN="token"
 # Get API response and store it
-curl -s "$API_ENDPOINT" > "$RESULT_FILE"
+curl -s -H "Authorization: Bearer $APITOKEN" "$API_ENDPOINT" > "$RESULT_FILE"
 
 # Validate JSON format of API response
 if ! jq empty "$RESULT_FILE" > /dev/null 2>&1; then
@@ -29,7 +30,7 @@ if [ "$USER_STORIES_COUNT" -ne "$ASSESSED_STORIES_COUNT" ]; then
     exit_with_error "Error: Mismatch in number of user stories"
 fi
 
-echo "Validation successful. Proceeding with further processing..."
+echo "Count validation successful. Proceeding with further processing..."
 
 # Compare scores and set result
 for (( i = 0; i < USER_STORIES_COUNT; i++ )); do

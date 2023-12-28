@@ -2,9 +2,7 @@
 
 set -e
 set -x
-
-#!/bin/bash
-set -euo pipefail
+set -o pipefail
 
 FILE_NAME="user-stories.json"
 EXPECTED_PATTERN='.user_stories[] | select(.id and .content and .needed and .weight) | .content'
