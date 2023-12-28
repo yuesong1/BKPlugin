@@ -27,11 +27,11 @@ fi
 echo "User stories from ${FILE_NAME}:"
 jq "$EXPECTED_PATTERN" "$FILE_NAME"
 
-# Pass to valitation API
-TOKEN="testToken"
-URL="http://localhost:5555/usvalidate"
-RESPONSE=$(curl -s -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d "$FILE_NAME" "$URL")
-echo "Validation response: ${RESPONSE}"
+# # Pass to valitation API
+# TOKEN="testToken"
+# URL="http://localhost:5555/usvalidate"
+# RESPONSE=$(curl -s -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d "$FILE_NAME" "$URL")
+# echo "Validation response: ${RESPONSE}"
 
 buildkite-agent annotate "Success: Valid user stories checking." --style 'success' --context 'user-stories-checking'
 
