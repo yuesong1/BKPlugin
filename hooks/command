@@ -15,7 +15,7 @@ exit_with_error() {
 
 APITOKEN="token"
 # Get API response and store it
-curl -s -H "Authorization: Bearer $APITOKEN" "$API_ENDPOINT" > "$RESULT_FILE"
+curl -s -H "Authorization: Bearer $APITOKEN" "$API_ENDPOINT" -d "USER_STORIES_FILE" > "$RESULT_FILE"
 
 # Validate JSON format of API response
 if ! jq empty "$RESULT_FILE" > /dev/null 2>&1; then
